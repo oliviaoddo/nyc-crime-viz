@@ -9,6 +9,8 @@ const Count = require('./count')
 const Crime = require('./crime')
 const Precinct = require('./precinct')
 
-Precinct.belongsToMany(Crime, {through: Count});
+
+Precinct.belongsToMany(Crime, { through: { model: Count, unique: false}, foreignKey: 'precinctId', constraints: false});
+Crime.belongsToMany(Precinct, { through: { model: Count, unique: false}, foreignKey: 'crimeId', constraints: false});
 
 module.exports = {Count, Crime, Precinct}
